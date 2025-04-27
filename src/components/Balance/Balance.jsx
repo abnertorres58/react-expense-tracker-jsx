@@ -1,5 +1,6 @@
 import React from 'react';
 import {Plus} from "lucide-react";
+import Modal from "../Modal/Modal.jsx";
 
 const Balance = () => {
     return (
@@ -13,10 +14,12 @@ const Balance = () => {
                     <p className="text-red-500">Expense: 0.00</p>
                 </div>
             </div>
-            <button className="bg-green-500 text-white px-4 py-2 rounded-3xl hover:bg-green-600
-            hover:scale-110 transition-all duration-300 flex gap-2 items-center">
+            <Modal
+                size="sm"
+                button={<button className="bg-green-500 text-white px-4 py-2 rounded-3xl hover:bg-green-600
+                        hover:scale-110 transition-all duration-300 flex gap-2 items-center">
                 <Plus className="w-6 h-6"/>Add Transaction
-            </button>
+            </button>}/>
         </div>
     </div>
     );
