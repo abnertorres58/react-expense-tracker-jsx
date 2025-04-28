@@ -1,6 +1,7 @@
 import React from 'react';
 import {Plus} from "lucide-react";
 import Modal from "../Modal/Modal.jsx";
+import CreateTransactionForm from "../Create Transaction/CreateTransactionForm.jsx";
 
 const Balance = () => {
     return (
@@ -19,7 +20,11 @@ const Balance = () => {
                 button={<button className="bg-green-500 text-white px-4 py-2 rounded-3xl hover:bg-green-600
                         hover:scale-110 transition-all duration-300 flex gap-2 items-center">
                 <Plus className="w-6 h-6"/>Add Transaction
-            </button>}/>
+            </button>
+            }
+            >
+                <CreateTransactionForm/>
+            </Modal>
         </div>
     </div>
     );
