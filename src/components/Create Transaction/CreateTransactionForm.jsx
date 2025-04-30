@@ -1,5 +1,6 @@
 import {useState} from "react";
 import {useTransactions} from "../../context/TransactionContext.jsx";
+import {TRANSACTION_CATEGORIES} from "../../constants/transaction-categories.jsx";
 
 const CreateTransactionForm = () => {
 
@@ -12,17 +13,7 @@ const CreateTransactionForm = () => {
         description: "",
         date: new Date().toISOString().split("T")[0]
     });
-    const categories= {
-        Income: ["Salary", "Freelance", "Investments", "Gift", "Other"],
-        Expense: [
-            "Food",
-            "Transportation",
-            "Utilities",
-            "Entertainment",
-            "Shopping",
-            "Other"
-        ]
-    };
+
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -106,7 +97,7 @@ const CreateTransactionForm = () => {
                     >
                         <option value="">Select Category</option>
                         {
-                            categories[formData.type].map((category) => (
+                            TRANSACTION_CATEGORIES[formData.type].map((category) => (
                                 <option key={category} value={category}>{category}</option>
                             ))
                         }

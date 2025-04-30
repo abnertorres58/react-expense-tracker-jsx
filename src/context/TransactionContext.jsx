@@ -1,4 +1,4 @@
-import { createContext, useContext, useReducer } from "react";
+import {createContext, useContext, useReducer, useState} from "react";
 import {TRANSACTION_TYPES} from "../constants/transaction-types.jsx";
 
 const TransactionContext = createContext();
@@ -32,11 +32,47 @@ export const TransactionProvider = ({children}) => {
 
     const [state, dispatch] = useReducer(transactionReducer, initialState);
 
+    const [filters, setFilters] = useState({
+        type: "all",
+        category: "all",
+        dateFrom: "",
+        dateTo: ""
+    })
+
+    const getFilteredTransactions = () => {
+        return state.transactions.filter((transaction) => {
+            if (filters.type !== "all" && transaction.type !== filters.type) {
+                return false;
+            }
+
+            if (filters.category !== "all" && transaction.category !== filters.category) {
+                return false;
+            }
+
+            if(filters.dateFrom && filters.dateTo){
+                const transactionDate = new Date(transaction.date);
+                const fromDate = new Date(filters.dateFrom);
+                const toDate = new Date(filters.dateTo);
+
+                if(transactionDate < fromDate || transactionDate > toDate){
+                    return false;
+                }
+            }
+
+            return true;
+
+        })
+    }
+
+    const updateFilters = (newFilters) => {
+        setFilters(newFilters);
+    }
+
     const calculateBalances = () => {
         let income = 0;
         let expense = 0;
 
-        state.transactions.forEach((transaction) => {
+        getFilteredTransactions().forEach((transaction) => {
             if (transaction.type === "Income") {
                 income = parseFloat(transaction.amount) + income;
             } else {
@@ -66,10 +102,10 @@ export const TransactionProvider = ({children}) => {
                 transactions: state.transactions,
                 addTransaction,
                 deleteTransaction,
-                calculateBalances
-            }
-
-            }
+                calculateBalances,
+                updateFilters,
+                filters
+            }}
         >{children}</TransactionContext.Provider>
     )
 }
