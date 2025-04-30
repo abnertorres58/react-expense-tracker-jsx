@@ -99,7 +99,7 @@ export const TransactionProvider = ({children}) => {
         <TransactionContext.Provider
 
             value={{
-                transactions: state.transactions,
+                transactions: getFilteredTransactions(),
                 addTransaction,
                 deleteTransaction,
                 calculateBalances,
