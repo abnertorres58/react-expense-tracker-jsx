@@ -1,8 +1,9 @@
 import TransactionCard from "../Transaction Card/TransactionCard.jsx";
+import {useTransactions} from "../../context/TransactionContext.jsx";
 
-const TransactionsList = ({ transactions, deleteTransaction }) => {
+const TransactionsList = () => {
 
-    console.log(transactions);
+    const {transactions, deleteTransaction} = useTransactions();
     return (
         <div className="bg-white p-3 rounded-lg container mx-auto my-3">
             <div className="flex justify-between items-center">

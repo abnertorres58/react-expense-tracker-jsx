@@ -1,6 +1,10 @@
 import {useState} from "react";
+import {useTransactions} from "../../context/TransactionContext.jsx";
 
-const CreateTransactionForm = ({ addTransaction }) => {
+const CreateTransactionForm = () => {
+
+    const {addTransaction} = useTransactions()
+
     const [ formData, setFormData] = useState({
         type: "Income",
         amount: 0,

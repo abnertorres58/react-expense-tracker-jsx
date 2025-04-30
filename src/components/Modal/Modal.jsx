@@ -1,4 +1,4 @@
-import {useState} from "react";
+import {useState, useEffect } from "react";
 import {CircleX} from "lucide-react";
 
 const Modal = ({ button, children, size='md' }) => {
@@ -8,6 +8,23 @@ const Modal = ({ button, children, size='md' }) => {
         md: "min-w-[90vh] min-w-[50vw]",
         lg: "min-w-[90vh] min-w-[70vw]"
     }
+
+    useEffect(() => {
+        const handleEscapeKey = (e) => {
+            if (e.key === "Escape" && isOpen) {
+                setIsOpen(false);
+            }
+        };
+
+        if(isOpen){
+            document.addEventListener("keydown", handleEscapeKey);
+        }
+
+        return () => {
+            document.removeEventListener("keydown", handleEscapeKey);
+        }
+    }, [isOpen])
+
     return (
         <div className="flex flex-col items-center">
             <div
