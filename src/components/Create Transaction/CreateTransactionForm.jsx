@@ -1,6 +1,6 @@
 import {useState} from "react";
 
-const CreateTransactionForm = () => {
+const CreateTransactionForm = ({ setTransaction }) => {
     const [ formData, setFormData] = useState({
         type: "Income",
         amount: 0,
@@ -31,8 +31,7 @@ const CreateTransactionForm = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        console.log({...formData,
-            id: Date.now()});
+        setTransaction((prev) => ([...prev, {...formData,id: Date.now()}]));
     };
 
     return (

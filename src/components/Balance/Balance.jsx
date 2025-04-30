@@ -3,7 +3,7 @@ import {Plus} from "lucide-react";
 import Modal from "../Modal/Modal.jsx";
 import CreateTransactionForm from "../Create Transaction/CreateTransactionForm.jsx";
 
-const Balance = () => {
+const Balance = ({ setTransaction}) => {
     return (
         <div className="bg-white p-5 rounded-lg container mx-auto my-5">
         <h1 className="text-2xl font-bold">Your Balance</h1>
@@ -23,7 +23,7 @@ const Balance = () => {
             </button>
             }
             >
-                <CreateTransactionForm/>
+                <CreateTransactionForm setTransaction={setTransaction}/>
             </Modal>
         </div>
     </div>
